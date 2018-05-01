@@ -34,5 +34,7 @@ sku.addEventListener('input', event => {
       img.src = '';
       name.innerHTML = '';
       dimensions.innerHTML = '';
+      priceInput.value = '';
+      priceDisplay.innerHTML = '';
     });
 });
