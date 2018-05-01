@@ -46,3 +46,5 @@ document.querySelector('input.price').addEventListener('input', event => {
 document.querySelector('#sku').addEventListener('input', event => {
   fetchAndDisplaySKU(event.target.value)
 });
+
+fetchAndDisplaySKU('4995358');

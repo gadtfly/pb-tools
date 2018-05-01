@@ -8,6 +8,9 @@
         input {
           display: none;
         }
+        #dimensions {
+          page-break-inside: avoid;
+        }
       }
       body {
         font-family: sans-serif;
@@ -16,14 +19,11 @@
       img {
         display: block;
       }
-      #dimensions {
-        page-break-inside: avoid;
-      }
     </style>
   </head>
   <body>
-    <input id='sku'>
-    <input class='price'>
+    <input id='sku' placeholder='sku'>
+    <input class='price' placeholder='price'>
     <img>
     <h1 id='name'></h1>
     <h2 class='price'></h1>
