@@ -1,4 +1,6 @@
-const input = document.getElementsByTagName('input')[0];
+const sku = document.getElementById('sku');
+const priceInput = document.querySelector('input.price');
+const priceDisplay = document.querySelector('h2.price');
 const img = document.getElementsByTagName('img')[0];
 const name = document.getElementById('name');
 const dimensions = document.getElementById('dimensions');
@@ -12,8 +14,12 @@ function takeWhile(xs, f) {
   return result;
 }
 
-input.addEventListener('input', event => {
-  fetch(`https://cors.now.sh/${`https://www.potterybarn.com/products/${input.value}`}`)
+priceInput.addEventListener('input', event => {
+  priceDisplay.innerHTML = priceInput.value;
+});
+
+sku.addEventListener('input', event => {
+  fetch(`https://cors.now.sh/${`https://www.potterybarn.com/products/${sku.value}`}`)
     .then(response => response.text() )
     .then(text => {
       const doc = (new DOMParser()).parseFromString(text, 'text/html');
