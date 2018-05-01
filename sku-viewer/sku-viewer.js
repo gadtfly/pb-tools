@@ -18,7 +18,7 @@ input.addEventListener('input', event => {
     .then(text => {
       const doc = (new DOMParser()).parseFromString(text, 'text/html');
       img.src = doc.querySelector('[property="og:image"]').content;
-      name.innerHTML = doc.querySelector('[property="og:title"]').content;;
+      name.innerHTML = doc.getElementsByClassName('breadcrumb-list-current-item')[0].textContent;
       dimensions.innerHTML = '';
       takeWhile(doc.querySelector('#tab1 .accordion-tab-copy').children, node => !node.textContent.startsWith('CARE AND MAINTENANCE'))
         .forEach(node => dimensions.appendChild(node));
