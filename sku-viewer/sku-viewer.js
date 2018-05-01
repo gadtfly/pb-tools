@@ -1,6 +1,7 @@
 const input = document.getElementsByTagName('input')[0];
 const img = document.getElementsByTagName('img')[0];
-const div = document.getElementsByTagName('div')[0];
+const name = document.getElementById('name');
+const dimensions = document.getElementById('dimensions');
 
 function takeWhile(xs, f) {
   const result = [];
@@ -17,13 +18,15 @@ input.addEventListener('input', event => {
     .then(text => {
       const doc = (new DOMParser()).parseFromString(text, 'text/html');
       img.src = doc.querySelector('[property="og:image"]').content;
-      div.innerHTML = '';
+      name.innerHTML = doc.querySelector('[property="og:title"]').content;;
+      dimensions.innerHTML = '';
       takeWhile(doc.querySelector('#tab1 .accordion-tab-copy').children, node => !node.textContent.startsWith('CARE AND MAINTENANCE'))
-        .forEach(node => div.appendChild(node));
+        .forEach(node => dimensions.appendChild(node));
     })
     .catch(error => {
       console.log(error);
       img.src = '';
-      div.innerHTML = '';
+      name.innerHTML = '';
+      dimensions.innerHTML = '';
     });
 });
