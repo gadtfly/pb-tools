@@ -26,7 +26,8 @@ function extractData(html) {
   };
 }
 
-function displayProduct({image, name, dimensions}) {
+function displayProduct({sku, image, name, dimensions}) {
+  document.querySelector('h3.sku').innerHTML      = `Item #${sku}`;
   document.querySelector('img').src               = image;
   document.querySelector('#name').innerHTML       = name;
   document.querySelector('#dimensions').innerHTML = dimensions;
@@ -35,7 +36,7 @@ function displayProduct({image, name, dimensions}) {
 function fetchAndDisplaySKU(sku) {
   fetch(`https://cors.now.sh/${`https://www.potterybarn.com/products/${sku}`}`)
     .then( response => response.text() )
-    .then( text => displayProduct(extractData(text)) )
+    .then( text => displayProduct({sku, ... extractData(text)}) )
     .catch( error => {
       console.log(sku);
       console.log(error);
@@ -46,6 +47,6 @@ document.querySelector('input.price').addEventListener('input', event => {
   document.querySelector('h2.price').innerHTML = event.target.value;
 });
 
-document.querySelector('#sku').addEventListener('input', event => {
+document.querySelector('input.sku').addEventListener('input', event => {
   fetchAndDisplaySKU(event.target.value)
 });
