@@ -20,7 +20,7 @@ function extractData(html) {
     image: doc.querySelector('[property="og:image"]').content,
     name:  doc.querySelector('.breadcrumb-list-current-item').textContent,
     dimensions: keepChildrenWhile(
-      doc.querySelector('dd:nth-child(4) .accordion-tab-copy'),
+      doc.querySelector('dd:nth-child(4) .accordion-tab-copy, .product-info-tab:nth-child(2) .product-info-tab-content-padding-container'),
       node => !node.textContent.startsWith('CARE AND MAINTENANCE')
     ).outerHTML
   };
@@ -36,7 +36,10 @@ function fetchAndDisplaySKU(sku) {
   fetch(`https://cors.now.sh/${`https://www.potterybarn.com/products/${sku}`}`)
     .then( response => response.text() )
     .then( text => displayProduct(extractData(text)) )
-    .catch( error => { console.log(error) } );
+    .catch( error => {
+      console.log(sku);
+      console.log(error);
+    });
 }
 
 document.querySelector('input.price').addEventListener('input', event => {
@@ -46,5 +49,3 @@ document.querySelector('input.price').addEventListener('input', event => {
 document.querySelector('#sku').addEventListener('input', event => {
   fetchAndDisplaySKU(event.target.value)
 });
-
-fetchAndDisplaySKU('4995358');
